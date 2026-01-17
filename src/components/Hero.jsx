@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import profile from "../assets/profile.jpg";
 
 const GlitchText = ({ text }) => {
   const [displayText, setDisplayText] = useState(text);
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
 
   useEffect(() => {
     let interval;
     const shuffle = () => {
       let iteration = 0;
       clearInterval(interval);
-      
+
       interval = setInterval(() => {
-        setDisplayText(prev => 
+        setDisplayText((prev) =>
           text
-            .split('')
+            .split("")
             .map((letter, index) => {
               if (index < iteration) {
                 return text[index];
               }
               return chars[Math.floor(Math.random() * chars.length)];
             })
-            .join('')
+            .join(""),
         );
 
         if (iteration >= text.length) {
           clearInterval(interval);
         }
-        
+
         iteration += 1 / 2;
       }, 25);
     };
@@ -47,7 +49,10 @@ const GlitchText = ({ text }) => {
 
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-16 bg-gray-50 dark:bg-dark transition-colors duration-300 overflow-hidden">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center pt-16 bg-gray-50 dark:bg-dark transition-colors duration-300 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col-reverse md:flex-row items-center gap-12">
         {/* Text Content */}
         <div className="flex-1 text-center md:text-left">
@@ -65,7 +70,8 @@ const Hero = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl sm:text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4"
           >
-            Saiki Abd Samed.<span className="animate-cursor text-primary">|</span>
+            Saiki Abd Samed.
+            <span className="animate-cursor text-primary">|</span>
           </motion.h1>
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
@@ -81,7 +87,9 @@ const Hero = () => {
             transition={{ delay: 0.4 }}
             className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto md:mx-0 text-lg mb-8 leading-relaxed"
           >
-            I help businesses grow by crafting scalable, user-centric web applications. Specializing in modern tech stacks to deliver results that matter.
+            I help businesses grow by crafting scalable, user-centric web
+            applications. Specializing in modern tech stacks to deliver results
+            that matter.
           </motion.p>
           <motion.div
             initial={{ y: 20, opacity: 0 }}
@@ -107,22 +115,22 @@ const Hero = () => {
           >
             <motion.div
               animate={{ y: [0, -20, 0] }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
               className="w-full h-full relative z-10"
             >
-             <div className="w-full h-full rounded-full border-4 border-primary/30 p-2 relative overflow-hidden shadow-2xl shadow-primary/20">
-                <img 
-                  src="/src/assets/profile.jpg" 
+              <div className="w-full h-full rounded-full border-4 border-primary/30 p-2 relative overflow-hidden shadow-2xl shadow-primary/20">
+                <img
+                  src={profile}
                   alt="Developer Profile"
                   className="w-full h-full object-cover rounded-full"
                 />
-             </div>
-             {/* Wave/Pulse Effect Wrapper */}
-             <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping opacity-20"></div>
+              </div>
+              {/* Wave/Pulse Effect Wrapper */}
+              <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping opacity-20"></div>
             </motion.div>
           </motion.div>
         </div>
